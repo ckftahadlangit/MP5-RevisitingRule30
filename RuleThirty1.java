@@ -1,9 +1,9 @@
 import java.util.*;
 
+//not threaded
+class RuleThirty1 {
 
-class MP1_Tahadlangit {
-
-	public MP1_Tahadlangit(int[][] grid, int size){
+	public RuleThirty1(int[][] grid, int size){
 		initialize(grid,size);
 		write(grid, size);
 		print(grid, size);
@@ -12,13 +12,10 @@ class MP1_Tahadlangit {
     //initialize 1st row and set everything to 0 except the middle
 	public static int[][] initialize(int[][] grid,int array_size){
 		int r = 0 , c = 0;
-
 		    while(c < array_size){
     			grid[r][c] = 0;
-    			
                 c++;
 		  }
-        
 		  grid[0][array_size / 2] = 1; //sets the middle element to 1
 	   return grid;
 	}
@@ -49,23 +46,7 @@ class MP1_Tahadlangit {
     
     //given conditions 
 	public static int val(int[][]grid, int row,int col, int arr_size){
-		int LEFT, RIGHT;
-		int MID = grid[row - 1][col];
-		if(col == 0){
-			LEFT = 0;
-		}else{
-			LEFT = grid[row - 1][col - 1];
-		}
-		
-		if(col == arr_size - 1){
-			RIGHT = 0;
-		}else{
-			RIGHT = grid[row - 1][col + 1];
-		}
-
-		//int LEFT = (col == 0) ? 0 : grid[row - 1][col - 1];
-		//int MIDDLE = grid[row - 1][col];
-		//int RIGHT = (col == arr_size - 1) ? 0 : grid[row - 1][col + 1];
+		int LEFT = (col == 0) ? 0 : grid[row - 1][col - 1],MIDDLE = grid[row - 1][col],RIGHT = (col == arr_size - 1) ? 0 : grid[row - 1][col + 1];
 
         if((LEFT == 1 && MID == 0 && RIGHT == 0) || (LEFT == 0 && MID == 1 && RIGHT == 1) || (LEFT == 0 && MID == 1 && RIGHT == 0) || (LEFT == 0 && MID == 0 && RIGHT == 1)){
             return 1;
@@ -83,8 +64,8 @@ class MP1_Tahadlangit {
 		int[][] grid = new int[size][size];
 
 		System.out.println("Generated output: ");
-		MP1_Tahadlangit x = new MP1_Tahadlangit(grid, size);
-		//long end = System.currentTimeMillis();
-		System.out.println("Time Consumed (in ms): " + (System.currentTimeMillis() - timeStarted));
+		RuleThirty1 x = new RuleThirty1(grid, size);
+		long timeEnded = System.currentTimeMillis();
+		System.out.println("Time Consumed (in ms): " + (timeEnded - timeStarted));
     }
 }
