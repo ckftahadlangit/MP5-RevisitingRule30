@@ -1,12 +1,17 @@
+
 import java.util.*;
 
-//not threaded
-class RuleThirty1 {
+class RuleThirty extends Thread{
 
-	public RuleThirty1(int[][] grid, int size){
-		initialize(grid,size);
-		write(grid, size);
-		print(grid, size);
+	private int size;
+	private int  grid[][];
+
+	public RuleThirty(int x){
+		if(x <= 0){
+			throw new IllegalArgumentException("The size is invalid");
+		}
+		size = x;
+		grid = new int[size][size];
 	}
     
     //initialize 1st row and set everything to 0 except the middle
@@ -20,16 +25,15 @@ class RuleThirty1 {
 	   return grid;
 	}
     
-    //prints the values
-	public static void print(int[][] grid, int size){
-		for (int i = 0; i < size; i++) {
+    public void print() {
+    	for (int i = 0; i < size; i++) {
     		for (int j = 0; j < size; j++) {
     			System.out.print(grid[i][j] + " ");
     		}
     		System.out.print("\n");
     	}
     }
-    
+
     //updates the values
 	public static int[][] write(int[][] grid, int size){
 		int row = 1 , column = 0; //starts with row 1
@@ -46,26 +50,12 @@ class RuleThirty1 {
     
     //given conditions 
 	public static int val(int[][]grid, int row,int col, int arr_size){
-		int LEFT = (col == 0) ? 0 : grid[row - 1][col - 1],MIDDLE = grid[row - 1][col],RIGHT = (col == arr_size - 1) ? 0 : grid[row - 1][col + 1];
+		int LEFT = (col == 0) ? 0 : grid[row - 1][col - 1], MIDDLE = grid[row - 1][col], RIGHT = (col == arr_size - 1) ? 0 : grid[row - 1][col + 1];
 
-        if((LEFT == 1 && MID == 0 && RIGHT == 0) || (LEFT == 0 && MID == 1 && RIGHT == 1) || (LEFT == 0 && MID == 1 && RIGHT == 0) || (LEFT == 0 && MID == 0 && RIGHT == 1)){
+        if((LEFT == 1 && MIDDLE == 0 && RIGHT == 0) || (LEFT == 0 && MIDDLE == 1 && RIGHT == 1) || (LEFT == 0 && MIDDLE == 1 && RIGHT == 0) || (LEFT == 0 && MIDDLE == 0 && RIGHT == 1)){
             return 1;
         }
 		return 0;
 	}
 
-
-	public static void main(String args[] ) throws Exception {
-		
-		System.out.println("Please enter grid size:" ); 
-		Scanner dimension = new Scanner(System.in);
-		int size = dimension.nextInt();
-		long timeStarted = System.currentTimeMillis();
-		int[][] grid = new int[size][size];
-
-		System.out.println("Generated output: ");
-		RuleThirty1 x = new RuleThirty1(grid, size);
-		long timeEnded = System.currentTimeMillis();
-		System.out.println("Time Consumed (in ms): " + (timeEnded - timeStarted));
-    }
 }
