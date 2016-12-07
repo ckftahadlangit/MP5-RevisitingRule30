@@ -33,7 +33,7 @@ public class RuleThirtyTester{
 
 		int ctr = 0;
 		for(int x = 0; x < THREAD_CTR; x++){
-			//w[ctr].start();
+			w[ctr].start();
 			while(w[ctr].isAlive()){
 				try{
 					w[ctr].join();
